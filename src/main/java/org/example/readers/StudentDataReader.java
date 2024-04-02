@@ -19,11 +19,11 @@ public class StudentDataReader {
         lineMapper.setFieldSetMapper(fieldSet -> {
             Student student = new Student();
             student.setId(Long.parseLong(fieldSet.readString("id")));
-            student.setFirstName(fieldSet.readString("firstname"));
-            student.setLastName(fieldSet.readString("lastname"));
+            student.setFirstname(fieldSet.readString("firstname"));
+            student.setLastname(fieldSet.readString("lastname"));
             student.setFaculty(fieldSet.readString("faculty"));
-            student.setYearOfBirth(Integer.parseInt(fieldSet.readString("year_of_birth")));
-            student.setYearOfAdmission(Integer.parseInt(fieldSet.readString("year_of_admission")));
+            student.setYearOfBirth(Integer.parseInt(fieldSet.readString("yearOfBirth")));
+            student.setYearOfAdmission(Integer.parseInt(fieldSet.readString("yearOfAdmission")));
             student.setIdnp(fieldSet.readString("idnp"));
             return student;
         });

@@ -1,8 +1,6 @@
 package org.example.writers;
 
-import org.example.model.FinancialData;
 import org.example.model.Student;
-import org.example.repository.FinancialDataRepository;
 import org.example.repository.StudentRepository;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
@@ -14,7 +12,7 @@ public class StudentWriter implements ItemWriter<Student> {
     private StudentRepository financialDataRepository;
 
     @Override
-    public void write(Chunk<? extends Student> chunk) throws Exception {
-        financialDataRepository.saveAll(chunk);
+    public void write(Chunk<? extends Student> list) throws Exception {
+        financialDataRepository.saveAll(list);
     }
 }

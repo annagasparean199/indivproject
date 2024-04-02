@@ -4,13 +4,15 @@ import org.example.model.Student;
 import org.springframework.batch.item.validator.ValidationException;
 import org.springframework.batch.item.validator.Validator;
 
-public class StudentValidator implements Validator<Student> {
+import java.util.HashSet;
+import java.util.Set;
 
+public class StudentValidator implements Validator<Student> {
     @Override
     public void validate(Student item) throws ValidationException {
         validateId(item.getId());
-        validateFirstName(item.getFirstName());
-        validateLastName(item.getLastName());
+        validateFirstName(item.getFirstname());
+        validateLastName(item.getLastname());
         validateFaculty(item.getFaculty());
         validateYearOfBirth(item.getYearOfBirth());
         validateYearOfAdmission(item.getYearOfAdmission());
@@ -18,7 +20,13 @@ public class StudentValidator implements Validator<Student> {
     }
 
     void validateId(Long id) throws ValidationException {
-        // Additional ID validation logic can be added here if needed
+        if (id == null || !isNumeric(String.valueOf(id))) {
+            throw new ValidationException("Invalid ID: " + id);
+        }
+    }
+
+    boolean isNumeric(String str) {
+        return str != null && str.matches("\\d+");
     }
 
     void validateFirstName(String firstName) throws ValidationException {
@@ -40,7 +48,6 @@ public class StudentValidator implements Validator<Student> {
     }
 
     boolean isValidFaculty(String faculty) {
-        // Only allow specific faculties
         String[] allowedFaculties = {"Mathematics", "Informatics", "Physics", "Chemistry"};
         for (String allowedFaculty : allowedFaculties) {
             if (allowedFaculty.equalsIgnoreCase(faculty)) {
